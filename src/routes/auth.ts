@@ -7,8 +7,7 @@ import { JWT_SECRET } from '../middleware/auth';
 
 export const authRouter = Router();
 
-// [SEC] Hardcoded JWT secret in source code (same as middleware — used here directly)
-const SECRET = 'super-secret-key-do-not-share-2024!';
+const SECRET = JWT_SECRET;
 
 // [SEC] No rate limiting on /api/auth/login
 authRouter.post('/login', async (req: Request, res: Response) => {
