@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import { authRouter } from './routes/auth';
 import { profileRouter } from './routes/profile';
 import { adminRouter } from './routes/admin';
+import { searchRouter } from './routes/search';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/search', searchRouter);
 
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
