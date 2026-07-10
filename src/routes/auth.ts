@@ -23,7 +23,7 @@ authRouter.post('/login', async (req: Request, res: Response) => {
     }
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: email.toString() });
         if (!user) {
             res.status(401).json({ error: 'Invalid credentials' });
             return;
@@ -74,7 +74,7 @@ authRouter.post('/forgot-password', async (req: Request, res: Response) => {
     const { email } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: email.toString() });
         if (!user) {
             // Don't reveal if user exists
             res.json({ message: 'If that email is registered, a reset link has been sent.' });
@@ -100,7 +100,7 @@ authRouter.post('/reset-password', async (req: Request, res: Response) => {
 
     try {
         // No expiry check — token is valid forever
-        const user = await User.findOne({ resetToken: token });
+        const user = await User.findOne({ resetToken: token.toString() });
         if (!user) {
             res.status(400).json({ error: 'Invalid reset token' });
             return;
@@ -121,7 +121,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     try {
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ email: email.toString() });
         if (existingUser) {
             res.status(409).json({ error: 'Email already registered' });
             return;
