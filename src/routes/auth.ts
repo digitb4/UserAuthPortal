@@ -7,9 +7,6 @@ import { JWT_SECRET } from '../middleware/auth';
 
 export const authRouter = Router();
 
-// [SEC] Hardcoded JWT secret in source code (same as middleware — used here directly)
-const SECRET = 'super-secret-key-do-not-share-2024!';
-
 // [SEC] No rate limiting on /api/auth/login
 authRouter.post('/login', async (req: Request, res: Response) => {
     // [SEC] ReDoS-vulnerable email validation regex
@@ -38,7 +35,7 @@ authRouter.post('/login', async (req: Request, res: Response) => {
         // [SEC] Session token not invalidated on logout (token persists)
         const token = jwt.sign(
             { userId: user._id, email: user.email, role: user.role },
-            SECRET,
+            JWT_SECRET,
             { expiresIn: '24h' }
         );
 
