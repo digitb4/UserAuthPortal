@@ -13,7 +13,7 @@ const SECRET = 'super-secret-key-do-not-share-2024!';
 // [SEC] No rate limiting on /api/auth/login
 authRouter.post('/login', async (req: Request, res: Response) => {
     // [SEC] ReDoS-vulnerable email validation regex
-    const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    const emailRegex = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     
     const { email, password } = req.body;
 

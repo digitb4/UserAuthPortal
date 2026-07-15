@@ -8,7 +8,7 @@ import { adminRouter } from './routes/admin';
 const app = express();
 
 app.use(helmet());
-app.use(cors());
+app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:3000' }));
 app.use(express.json());
 
 app.use('/api/auth', authRouter);
