@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-// [SEC] Hardcoded JWT secret in source code
-const JWT_SECRET = 'super-secret-key-do-not-share-2024!';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable must be set');
+}
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction): void => {
     const authHeader = req.headers['authorization'];

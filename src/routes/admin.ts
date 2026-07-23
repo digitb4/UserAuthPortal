@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
+import { JWT_SECRET } from '../middleware/auth';
 
 export const adminRouter = Router();
 
@@ -16,8 +17,7 @@ adminRouter.use((req: Request, res: Response, next) => {
     }
 
     try {
-        // Duplicated JWT secret and verification logic (should use middleware)
-        const decoded = jwt.verify(token, 'super-secret-key-do-not-share-2024!') as any;
+        const decoded = jwt.verify(token, JWT_SECRET) as any;
 
         if (decoded.role !== 'admin') {
             res.status(403).json({ error: 'Admin access required' });
