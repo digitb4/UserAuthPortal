@@ -46,3 +46,5 @@ npm test
 | GET | /api/admin/users | List all users (admin) |
 | PUT | /api/admin/users/:id/role | Change user role (admin) |
 | DELETE | /api/admin/users/:id | Delete user (admin) |
+
+<!-- SonarCloud PR analysis trigger -->
